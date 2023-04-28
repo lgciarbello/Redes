@@ -27,7 +27,7 @@ public class ServerWriter implements Runnable {
                 if (bufferedMemory.isEmpty()) {
                     out.writeUTF(String.valueOf(count));
                     count++;
-                    Thread.sleep(1000);
+                    Thread.sleep(2000);
                 } else {
                     out.writeUTF(bufferedMemory.get(0));
                     bufferedMemory.remove(0);

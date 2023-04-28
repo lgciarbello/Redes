@@ -1,6 +1,7 @@
 package org.example.server.thread;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -11,7 +12,7 @@ public class ServerListener implements Runnable {
 
     private List<String> bufferedMemory;
     private Socket socket;
-    private BufferedReader in;
+    private DataInputStream in;
 
     public ServerListener(List<String> bufferedMemory, Socket socket){
         super();
@@ -21,15 +22,16 @@ public class ServerListener implements Runnable {
 
     public void listen() throws IOException {
         // takes input from the client socket
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream())); // gets client's data stream
+        in = new DataInputStream(socket.getInputStream()); // gets client's data stream
         String line = "";
 
         // reads message from client until "Over is sent
         while (!line.equals("Over")) {
             try {
-                line = in.readLine(); // reads and stores data received by stream into "line"
-                bufferedMemory.add(line);
+                line = in.readUTF(); // reads and stores data received by stream into "line"
                 System.out.println(line);
+                bufferedMemory.add(line);
+
             }
             catch(IOException i) {
                 System.out.println(i);
