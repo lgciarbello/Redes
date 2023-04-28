@@ -7,19 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServerInit implements Runnable{
-    private ServerSocket server;
+    private final Socket socket;
 
-    public ServerInit(ServerSocket server){
-        this.server = server;
+    public ServerInit(Socket socket){
+        this.socket = socket;
     }
 
     public void intialize(){
-        System.out.println("Waiting for a client ...");
-        Socket socket = null; // waits for a connection made by a client
 
         try {
-            socket = server.accept();
-
             List<String> bufferedMemory = new ArrayList<>();
             ServerListener listener = new ServerListener(bufferedMemory, socket);
             ServerWriter writer = new ServerWriter(bufferedMemory, socket);

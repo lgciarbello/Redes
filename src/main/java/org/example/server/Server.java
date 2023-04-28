@@ -27,7 +27,10 @@ public class Server {
             System.out.println("Server started");
 
             while (true) {
-                ServerInit serverInit = new ServerInit(server);
+                System.out.println("Waiting for a client ...");
+                socket = server.accept();
+
+                ServerInit serverInit = new ServerInit(socket);
                 new Thread(serverInit).start();
             }
 
