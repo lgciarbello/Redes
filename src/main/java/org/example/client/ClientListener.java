@@ -1,9 +1,6 @@
 package org.example.client;
 
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -36,7 +33,7 @@ public class ClientListener implements Runnable{
                     line = input.readUTF();
                     System.out.println(line);
                 } catch (IOException e){
-                    e.printStackTrace();
+                    System.out.println("Servidor fechado");
                     break;
                 }
             }

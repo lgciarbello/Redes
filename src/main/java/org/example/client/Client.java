@@ -36,7 +36,7 @@ public class Client implements Runnable{
         String luisIp = "192.168.195.203";
         String juniorIp = "192.168.195.189";
 
-        Client client = new Client(juniorIp, 5000);
+        Client client = new Client(luisIp, 5000);
         new ClientListener(client);
 
     }
@@ -49,8 +49,8 @@ public class Client implements Runnable{
         while (!line.equals("Over")) {      // Mantem o envio até que "Over" seja lido na linha
             try {
                 if(input != null){
-                    caracter =  System.in.read();
-                    System.out.println(caracter);
+                    line = input.readLine();
+                    System.out.println(line);
                     output.writeUTF(line);
                 }
 
