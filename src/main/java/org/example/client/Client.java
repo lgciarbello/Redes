@@ -50,7 +50,6 @@ public class Client implements Runnable{
             try {
                 if(input != null){
                     line = input.readLine();
-                    System.out.println(line);
                     output.writeUTF(line);
                 }
 

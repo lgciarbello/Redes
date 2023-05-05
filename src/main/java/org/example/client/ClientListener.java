@@ -21,7 +21,7 @@ public class ClientListener implements Runnable{
     @Override
     public void run() {
 
-        try(ServerSocket serverSocket = new ServerSocket(cliente.getPort())){
+        try{
             Socket socket = cliente.getSocket();
             System.out.println("O Cliente está ouvindo");
 
