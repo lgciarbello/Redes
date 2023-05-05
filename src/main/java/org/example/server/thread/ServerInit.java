@@ -1,16 +1,18 @@
 package org.example.server.thread;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 public class ServerInit implements Runnable{
     private final Socket socket;
+    private final Semaphore semaphore;
 
-    public ServerInit(Socket socket){
+    public ServerInit(Socket socket, Semaphore semaphore){
         this.socket = socket;
+        this.semaphore = semaphore;
     }
 
     public void intialize(){
@@ -26,12 +28,14 @@ public class ServerInit implements Runnable{
             threadL.start();
             threadW.start();
 
-            System.out.println("Client accepted");
+            System.out.println("SERVER INIT THREAD: Client accepted");
             threadL.join();
             threadW.join();
 
             System.out.println("Closing connection");
             socket.close();
+
+            semaphore.release();
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
