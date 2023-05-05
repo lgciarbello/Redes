@@ -36,6 +36,8 @@ public class ServerInit implements Runnable{
             socket.close();
 
             semaphore.release();
+            System.out.println("Releasing semaphore...");
+
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
